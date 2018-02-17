@@ -6,6 +6,7 @@ class Stack {
         LinkedList* list;
     public:
         Stack();
+        Stack(int d);
         void push(int d);
         int pop();
         void print();
@@ -13,6 +14,10 @@ class Stack {
 
 Stack::Stack(){
     list = new LinkedList();
+}
+
+Stack::Stack(int d){
+    list = new LinkedList(d);
 }
 
 void Stack::push(int d){
@@ -31,9 +36,11 @@ void Stack::print(){
 }
 
 int main(){
-    Stack stl = Stack();
-    stl.push(1);
+    Stack stl = Stack(1);
     stl.push(2);
     stl.push(3);
+    stl.push(4);
+    stl.print();
+    stl.pop();
     stl.print();
 }

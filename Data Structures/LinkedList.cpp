@@ -28,9 +28,9 @@ LinkedList::LinkedList(int d){
 
 
 void LinkedList::add(int d){
-    Node newNode = Node(d);
-    newNode.next = this -> head;
-    this -> head = &newNode;
+    Node* newNode = new Node(d);
+    newNode -> next = this -> head;
+    this -> head = newNode;
 }
 
 void LinkedList::remove(int d){
