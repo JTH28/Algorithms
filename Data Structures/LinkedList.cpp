@@ -1,27 +1,5 @@
 #include <iostream>
-
-//-----------------------------Declarations for Node and LinkedList class
-
-class Node {
-    public:
-        Node* next;
-        int data;
-
-        Node();
-        Node(int data);
-};
-
-class LinkedList {
-    public:
-        Node* head;
-        Node* tail;
-        LinkedList();
-        LinkedList(int data);
-
-        void add(int data);
-        void remove(int data);
-        void print();
-};
+#include "LinkedList.h"
 
 //-----------------------------overloaded constructor for Node
 
@@ -50,10 +28,11 @@ LinkedList::LinkedList(int d){
 
 
 void LinkedList::add(int d){
-    this -> tail -> next = new Node(d);
-    this -> tail = this -> tail -> next;     //Chasing this List tail a little, lol
-}                                            //this is just setting the tail pointer
-                                             //to the next node after adding a new one
+    Node newNode = Node(d);
+    newNode.next = this -> head;
+    this -> head = &newNode;
+}
+
 void LinkedList::remove(int d){
     Node* cur = this -> head;
     Node* prev = nullptr;
@@ -72,6 +51,21 @@ void LinkedList::remove(int d){
     }
 }
 
+void LinkedList::reverse(){
+    Node* prev   = nullptr;
+    Node* cur    = this -> head;
+    Node* next   = cur != nullptr ? cur -> next : nullptr;
+
+    while(cur){
+        next = cur -> next;
+
+        cur -> next = prev;
+        prev = cur;
+        cur = next;
+    }
+    this -> head = prev;
+}
+
 void LinkedList::print(){
     Node* list = this -> head;
     while(list){
@@ -80,13 +74,17 @@ void LinkedList::print(){
     }
 }
 
+/*
 // A basic 1 2 3 linked list test
 int main() {
     LinkedList test(1);
-    test.print();
+    //test.print();
     test.add(2);
     test.add(3);
-    test.print();
-    test.remove(2);
+    //test.print();
+    //test.remove(2);
+    //test.print();
+    test.reverse();
     test.print();
 }
+*/
